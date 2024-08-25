@@ -272,7 +272,7 @@ const LayoutSlug = props => {
             const article = document.getElementById('notion-article')
             if (!article) {
               router.push('/404').then(() => {
-                console.warn('找不到页面', router.asPath)
+                console.warn('Page Not Found', router.asPath)
               })
             }
           }
@@ -290,6 +290,8 @@ const LayoutSlug = props => {
 
         {!lock && (
           <div id='article-wrapper' className='mx-auto md:w-full md:px-5'>
+            {/* 广告嵌入 */}
+            <AdSlot type={'in-article'} />
             {/* 文章主体 */}
             <article itemScope itemType='https://schema.org/Movie'>
               {/* Notion文章主体 */}
@@ -303,7 +305,8 @@ const LayoutSlug = props => {
 
               {/* 上一篇\下一篇文章 */}
               <PostAdjacent {...props} />
-
+              {/* 广告嵌入 */}
+              <AdSlot type={'in-article'} />
               {/* 分享 */}
               <ShareBar post={post} />
               {post?.type === 'Post' && (
@@ -382,7 +385,7 @@ const Layout404 = props => {
                 <h1 className='error-title font-extrabold md:text-9xl text-7xl dark:text-white'>
                   404
                 </h1>
-                <div className='dark:text-white'>请尝试站内搜索寻找文章</div>
+                <div className='dark:text-white'>Please searching the site to find articles</div>
                 <Link href='/'>
                   <button className='bg-blue-500 py-2 px-4 text-white shadow rounded-lg hover:bg-blue-600 hover:shadow-md duration-200 transition-all'>
                     回到主页
@@ -391,7 +394,7 @@ const Layout404 = props => {
               </div>
             </div>
 
-            {/* 404页面底部显示最新文章 */}
+            {/* 404 The latest articles are displayed at the bottom of the page */}
             <div className='mt-12'>
               <LatestPostsGroup {...props} />
             </div>
@@ -463,6 +466,7 @@ const LayoutTagIndex = props => {
         className='duration-200 flex flex-wrap space-x-5 space-y-5 m-10 justify-center'>
         {tagOptions.map(tag => {
           return (
+            
             <Link
               key={tag.name}
               href={`/tag/${tag.name}`}
